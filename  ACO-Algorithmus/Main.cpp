@@ -1,10 +1,18 @@
-#include <iostream>
-using namespace std;
+#include "MainWindow.h"
+
+#include <QApplication>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
-    cout << "Test" << endl;
+    QApplication a(argc, argv);
+    MainWindow *w = new MainWindow();
+    w->show();
 
-    return 0;
+    //Ausgabe während der Ausführung der Applikation, zu Testzwecken
+    qDebug() << "Test";
+
+    return a.exec();
+
 }
 
