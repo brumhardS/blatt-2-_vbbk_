@@ -13,10 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += Main.cpp\
-    MainWindow.cpp
+    Gui/MainWindow.cpp\
+    Gui/mouse.cpp
 
-HEADERS  += \ 
-    MainWindow.h
+HEADERS  += Gui/MainWindow.h\
+    Gui/mouse.h
 
 FORMS    +=
 
