@@ -53,11 +53,11 @@
 
 #include <QGraphicsItem>
 
-//! [0]
-class Mouse : public QGraphicsItem
+
+class AntGraphic : public QGraphicsItem
 {
 public:
-    Mouse();
+    AntGraphic();
 
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
@@ -70,8 +70,7 @@ protected:
 private:
     qreal angle;
     qreal speed;
-    qreal mouseEyeDirection;
-    QColor color;
+    qreal antEyeDirection;
 };
 //! [0]
 

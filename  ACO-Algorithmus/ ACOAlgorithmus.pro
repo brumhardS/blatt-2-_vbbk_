@@ -13,11 +13,23 @@ TEMPLATE = app
 
 
 SOURCES += Main.cpp\
-    Gui/MainWindow.cpp\
-    Gui/mouse.cpp
+    Gui/AntGraphic.cpp \
+    Gui/BerryGraphic.cpp \
+    Gui/StickGraphic.cpp \
+    Gui/TreeGraphic.cpp \
+    Data/Ant.cpp \
+    Data/Node.cpp
 
-HEADERS  += Gui/MainWindow.h\
-    Gui/mouse.h
+HEADERS  += \
+    Gui/AntGraphic.h \
+    Gui/BerryGraphic.h \
+    Gui/StickGraphic.h \
+    Gui/TreeGraphic.h \
+    Data/Ant.h \
+    Data/Node.h
 
 FORMS    +=
+
+RESOURCES += \
+    externpicutures.qrc
 

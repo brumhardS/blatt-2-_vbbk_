@@ -48,7 +48,7 @@
 **
 ****************************************************************************/
 
-#include "mouse.h"
+#include "AntGraphic.h"
 
 #include <QGraphicsScene>
 #include <QPainter>
@@ -69,75 +69,82 @@ static qreal normalizeAngle(qreal angle)
 }
 
 //! [0]
-Mouse::Mouse()
-    : angle(0), speed(0), mouseEyeDirection(0),
-      color(qrand() % 256, qrand() % 256, qrand() % 256)
-{
+AntGraphic::AntGraphic()
+    : angle(0), speed(0), antEyeDirection(0){
     setRotation(qrand() % (360 * 16));
 }
 //! [0]
 
 //! [1]
-QRectF Mouse::boundingRect() const
+QRectF AntGraphic::boundingRect() const
 {
     qreal adjust = 0.5;
     return QRectF(-18 - adjust, -22 - adjust,
                   36 + adjust, 60 + adjust);
 }
-//! [1]
 
-//! [2]
-QPainterPath Mouse::shape() const
+QPainterPath AntGraphic::shape() const
 {
     QPainterPath path;
     path.addRect(-10, -20, 20, 40);
     return path;
 }
-//! [2]
 
-//! [3]
-void Mouse::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
+void AntGraphic::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    // Body
-    painter->setBrush(color);
-    painter->drawEllipse(-10, -20, 20, 40);
-
-    // Eyes
-    painter->setBrush(Qt::white);
-    painter->drawEllipse(-10, -17, 8, 8);
-    painter->drawEllipse(2, -17, 8, 8);
-
-    // Nose
+    // Ameisenkörper
     painter->setBrush(Qt::black);
-    painter->drawEllipse(QRectF(-2, -22, 4, 4));
 
-    // Pupils
-    painter->drawEllipse(QRectF(-8.0 + mouseEyeDirection, -17, 4, 4));
-    painter->drawEllipse(QRectF(4.0 + mouseEyeDirection, -17, 4, 4));
+    //Kopf
+    painter->drawEllipse(-10, -10,  5, 5);
 
-    // Ears
-    painter->setBrush(scene()->collidingItems(this).isEmpty() ? Qt::darkYellow : Qt::red);
-    painter->drawEllipse(-17, -12, 16, 16);
-    painter->drawEllipse(1, -12, 16, 16);
+    //Körper
+    painter->drawEllipse(-10,  -4,  5, 10);
+    painter->drawEllipse(-10,   1,  5, 10);
+    painter->drawEllipse(-12.5,   6,  10, 10);
 
-    // Tail
-    QPainterPath path(QPointF(0, 20));
-    path.cubicTo(-5, 22, -5, 22, 0, 25);
-    path.cubicTo(5, 27, 5, 32, 0, 30);
-    path.cubicTo(-5, 32, -5, 42, 0, 35);
-    painter->setBrush(Qt::NoBrush);
-    painter->drawPath(path);
+    // Fühler im Kopf
+    painter->drawLine(QLine(-10,-9,-11,-11));
+    painter->drawLine(QLine(-11,-11,-12,-10));
+    painter->drawLine(QLine(-12,-10,-13,-12));
+
+    painter->drawLine(QLine(-10,-9,-4,-11));
+    painter->drawLine(QLine(-4,-11,-3,-10));
+    painter->drawLine(QLine(-3,-10,-2,-12));
+
+    // Leg 1
+    painter->drawLine(QLine(-10,-4,-14,-5));
+    painter->drawLine(QLine(-14,-5,-16,-7));
+
+    painter->drawLine(QLine(-10,-4,-1,-5));
+    painter->drawLine(QLine(-1,-5,0,-7));
+
+    // Leg 2
+    painter->drawLine(QLine(-10,1,-14,1));
+    painter->drawLine(QLine(-14,1,-15,5));
+    painter->drawLine(QLine(-15,5,-17,7));
+
+    painter->drawLine(QLine(-10,1,-1,1));
+    painter->drawLine(QLine(-1,1,0,5));
+    painter->drawLine(QLine(0,5,2,7));
+
+    // Leg 3
+    painter->drawLine(QLine(-10, 5,-17,11));
+    painter->drawLine(QLine(-17,11,-19,16));
+    painter->drawLine(QLine(-19,16,-22,19));
+    painter->drawLine(QLine(-22,19,-23,18));
+
+    painter->drawLine(QLine(-7, 5, 3,11));
+    painter->drawLine(QLine(3,11,2,16));
+    painter->drawLine(QLine(2,16,5,19));
+    painter->drawLine(QLine(5,19,6,18));
 }
-//! [3]
 
-//! [4]
-void Mouse::advance(int step)
+void AntGraphic::advance(int step)
 {
     if (!step)
         return;
-//! [4]
     // Don't move too far away
-//! [5]
     QLineF lineToCenter(QPointF(0, 0), mapFromScene(0, 0));
     if (lineToCenter.length() > 150) {
         qreal angleToCenter = ::acos(lineToCenter.dx() / lineToCenter.length());
@@ -156,12 +163,9 @@ void Mouse::advance(int step)
         angle += 0.25;
     } else if (::sin(angle) > 0) {
         angle -= 0.25;
-//! [5] //! [6]
     }
-//! [6]
 
     // Try not to crash with any other mice
-//! [7]
     QList<QGraphicsItem *> dangerMice = scene()->items(QPolygonF()
                                                        << mapToScene(0, 0)
                                                        << mapToScene(-30, -50)
@@ -170,41 +174,33 @@ void Mouse::advance(int step)
         if (item == this)
             continue;
 
-        QLineF lineToMouse(QPointF(0, 0), mapFromItem(item, 0, 0));
-        qreal angleToMouse = ::acos(lineToMouse.dx() / lineToMouse.length());
-        if (lineToMouse.dy() < 0)
-            angleToMouse = TwoPi - angleToMouse;
-        angleToMouse = normalizeAngle((Pi - angleToMouse) + Pi / 2);
+        QLineF lineToAnt(QPointF(0, 0), mapFromItem(item, 0, 0));
+        qreal angleToAnt = ::acos(lineToAnt.dx() / lineToAnt.length());
+        if (lineToAnt.dy() < 0)
+            angleToAnt = TwoPi - angleToAnt;
+        angleToAnt = normalizeAngle((Pi - angleToAnt) + Pi / 2);
 
-        if (angleToMouse >= 0 && angleToMouse < Pi / 2) {
+        if (angleToAnt >= 0 && angleToAnt < Pi / 2) {
             // Rotate right
             angle += 0.5;
-        } else if (angleToMouse <= TwoPi && angleToMouse > (TwoPi - Pi / 2)) {
+        } else if (angleToAnt <= TwoPi && angleToAnt > (TwoPi - Pi / 2)) {
             // Rotate left
             angle -= 0.5;
-//! [7] //! [8]
         }
-//! [8] //! [9]
     }
-//! [9]
 
     // Add some random movement
-//! [10]
     if (dangerMice.size() > 1 && (qrand() % 10) == 0) {
         if (qrand() % 1)
             angle += (qrand() % 100) / 500.0;
         else
             angle -= (qrand() % 100) / 500.0;
     }
-//! [10]
-
-//! [11]
     speed += (-50 + qrand() % 100) / 100.0;
 
     qreal dx = ::sin(angle) * 10;
-    mouseEyeDirection = (qAbs(dx / 5) < 1) ? 0 : dx / 5;
+    antEyeDirection = (qAbs(dx / 5) < 1) ? 0 : dx / 5;
 
     setRotation(rotation() + dx);
     setPos(mapToParent(0, -(3 + sin(speed) * 3)));
 }
-//! [11]
