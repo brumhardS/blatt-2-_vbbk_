@@ -18,7 +18,8 @@ SOURCES += Main.cpp\
     Gui/StickGraphic.cpp \
     Gui/TreeGraphic.cpp \
     Data/Ant.cpp \
-    Data/Node.cpp
+    Data/Node.cpp \
+    Gui/MainWindow.cpp
 
 HEADERS  += \
     Gui/AntGraphic.h \
@@ -26,7 +27,8 @@ HEADERS  += \
     Gui/StickGraphic.h \
     Gui/TreeGraphic.h \
     Data/Ant.h \
-    Data/Node.h
+    Data/Node.h \
+    Gui/MainWindow.h
 
 FORMS    +=
 
