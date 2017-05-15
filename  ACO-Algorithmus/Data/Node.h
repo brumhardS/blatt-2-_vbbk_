@@ -1,6 +1,10 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <QGraphicsItem>
+#include <QWidget>
+
+
 
 class Node
 {
