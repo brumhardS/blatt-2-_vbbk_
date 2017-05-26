@@ -52,10 +52,12 @@
 #define MOUSE_H
 
 #include <QGraphicsItem>
+#include <QObject>
 
 
-class AntGraphic : public QGraphicsItem
+class AntGraphic : public QGraphicsObject
 {
+    Q_OBJECT
 public:
     AntGraphic();
 
@@ -71,6 +73,10 @@ private:
     qreal angle;
     qreal speed;
     qreal antEyeDirection;
+    QWidget *parent;
+
+public slots:
+    void goNext(QPoint *point);
 };
 //! [0]
 

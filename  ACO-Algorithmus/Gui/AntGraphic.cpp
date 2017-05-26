@@ -53,6 +53,9 @@
 #include <QGraphicsScene>
 #include <QPainter>
 #include <QStyleOption>
+#include <QDebug>
+#include <qmath.h>
+#include <QtMath>
 
 #include <math.h>
 
@@ -69,14 +72,12 @@ static qreal normalizeAngle(qreal angle)
 
 }
 
-//! [0]
 AntGraphic::AntGraphic()
     : angle(0), speed(0), antEyeDirection(0){
     setRotation(qrand() % (360 * 16));
 }
-//! [0]
 
-//! [1]
+
 QRectF AntGraphic::boundingRect() const
 {
     qreal adjust = 0.5;
@@ -147,7 +148,7 @@ void AntGraphic::advance(int step)
         return;
     // Don't move too far away
     QLineF lineToCenter(QPointF(0, 0), mapFromScene(0, 0));
-    if (lineToCenter.length() > 150) {
+    if (lineToCenter.length() > 50) {
         qreal angleToCenter = ::acos(lineToCenter.dx() / lineToCenter.length());
         if (lineToCenter.dy() < 0)
             angleToCenter = TwoPi - angleToCenter;
@@ -166,7 +167,7 @@ void AntGraphic::advance(int step)
         angle -= 0.25;
     }
 
-    // Try not to crash with any other mice
+     //Try not to crash with any other mice
     QList<QGraphicsItem *> dangerMice = scene()->items(QPolygonF()
                                                        << mapToScene(0, 0)
                                                        << mapToScene(-30, -50)
@@ -204,4 +205,17 @@ void AntGraphic::advance(int step)
 
     setRotation(rotation() + dx);
     setPos(mapToParent(0, -(3 + sin(speed) * 3)));
+}
+
+void AntGraphic::goNext(QPoint *point)
+{
+    QPointF actualPosition = mapFromScene(0, 0);
+
+    qreal deltaX = point->rx() - actualPosition.rx();
+    qreal deltaY = point->ry() - actualPosition.ry();
+
+    qreal delta = qSqrt(deltaX);
+
+    // angle, speed und direction an hand von aktueller postition und ziel neu berechnen
+    // advance() ameise in richtung angle und mit geschwindigkeit speed bewegen
 }

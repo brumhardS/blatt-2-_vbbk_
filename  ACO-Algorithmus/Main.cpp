@@ -6,18 +6,22 @@
 #include <math.h>
 #include <Gui/BerryGraphic.h>
 #include <Gui/MainWindow.h>
-#include <Gui/MainWindowNew.h>
+#include <Logic/MainApplication.h>
 #include "Gui/AntGraphic.h"
 
 int main(int argc, char **argv)
 {
    QApplication app(argc, argv);
    qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
-   MainWindow *mainWindow = new MainWindow;
-   mainWindow->show();
 
-   //MainWindowNew *mainWindow = new MainWindowNew;
-   //mainWindow->show();
+   MainApplication *mainapplication = new MainApplication();
+
+   MainWindow * mainWindow =
+           new MainWindow(mainapplication->getList(),
+                          new QPoint(BERRY_POSITION_X, BERRY_POSITION_Y),
+                          new QPoint(ANT_COLONY_X, ANT_COLONY_Y),
+                          new QPoint(RASTER_X, RASTER_Y));
+   mainWindow->show();
    return app.exec();
 }
 

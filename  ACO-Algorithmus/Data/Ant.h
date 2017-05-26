@@ -4,24 +4,36 @@
 #include <Gui/AntGraphic.h>
 
 
-
-class Ant
+class Ant : public QObject
 {
+    Q_OBJECT
+
 public:
-    Ant(AntGraphic graphic);
 
-    void setPheromone(int value);
-    void selectNextNode();
+    Ant(QPoint *actualPos);
+
+    bool getIsSearchFeed();
+    void setIsSearchFeed(bool value);
+
+    int getPathLength();
+
+    QList<QPoint *> getPath() const;
+    void setPath(const QList<QPoint *> &value);
+
+    void sendSignal();
+
 private:
-    AntGraphic antGraphic;
+    int actualPathCount;
 
-    int shortestPath;
-    int actualPath;
+    QList<QPoint*> path;
+
+    QPoint *actualPos;
 
     // Richtung --> true: Futtersuche, false: Rückweg!
     bool isSearchFeed;
 
-
+signals:
+    void move(QPoint *point);
 };
 
 #endif // ANT_H

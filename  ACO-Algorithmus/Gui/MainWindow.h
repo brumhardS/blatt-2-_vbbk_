@@ -6,16 +6,25 @@
 #include <QMainWindow>
 #include <QTimer>
 
-#define ANT_COUNT 500
-#define BERRY_COUNT 1
+#include <Data/Ant.h>
 
-class MainWindow
+
+
+class MainWindow : public QObject
 {
+    Q_OBJECT
+
 public:
-     MainWindow();
+     MainWindow(QList<Ant*> *allAnts, QPoint * berryPosition, QPoint * antColony, QPoint *raster);
      void show();
 
+     QRectF getRectAngle() const;
+     void setRectAngle(const QRectF &value);
+
 private:
+
+     QPoint modelToWinCoordinates(int x, int y);
+
      QGraphicsScene scene;
      QRectF rectAngle;
      QGraphicsView view;
