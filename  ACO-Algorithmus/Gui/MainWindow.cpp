@@ -1,6 +1,9 @@
 #include "AntGraphic.h"
 #include "BerryGraphic.h"
 #include "MainWindow.h"
+#include "NodeGraphic.h"
+#include "NodeWidget.h"
+#include <QBackingStore>
 #include <QDebug>
 
 MainWindow::MainWindow() :
@@ -11,37 +14,24 @@ MainWindow::MainWindow() :
 
     scene.setItemIndexMethod(QGraphicsScene::NoIndex);
 
-    for (int i = 0; i < ANT_COUNT; ++i) {
+    for (int i = 0; i < ANT_COUNT; ++i)
+    {
         AntGraphic *ant = new AntGraphic;
         ant->setPos(rectAngle.topLeft());
         scene.addItem(ant);
     }
 
-
-    /*
-        for(int j = 0; j < rectAngle.height(); j++)
-        {
-            AntGraphic *ant = new AntGraphic;
-            ant->setPos(0,j);
-            scene.addItem(ant);
-        }
-
-        for(int j = 0; j < rectAngle.width(); j++)
-        {
-            AntGraphic *ant = new AntGraphic;
-            ant->setPos(j,0);
-            scene.addItem(ant);
-        }
-        */
-
-    qDebug() << "Rect-Width: ";
-    qDebug() << rectAngle.width();
-    qDebug() << "Rect-Height:";
-    qDebug() << rectAngle.height();
-
     BerryGraphic *berry = new BerryGraphic;
     berry->setPos(rectAngle.center());
     scene.addItem(berry);
+
+    BerryGraphic *berryTwo = new BerryGraphic;
+    berryTwo->setPos(rectAngle.topLeft());
+    scene.addItem(berryTwo);
+
+    BerryGraphic *berryThree = new BerryGraphic;
+    berryThree->setPos(rectAngle.topRight());
+    scene.addItem(berryThree);
 
     view.setRenderHint(QPainter::Antialiasing);
     view.setBackgroundBrush(QPixmap(":/Images/gras.jpg"));

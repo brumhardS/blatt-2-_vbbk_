@@ -20,7 +20,9 @@ SOURCES += Main.cpp\
     Data/Ant.cpp \
     Data/Node.cpp \
     Gui/MainWindow.cpp \
-    Gui/NodeGraphic.cpp
+    Gui/NodeGraphic.cpp \
+    Gui/MainWindowNew.cpp \
+    Gui/NodeWidget.cpp
 
 HEADERS  += \
     Gui/AntGraphic.h \
@@ -30,7 +32,9 @@ HEADERS  += \
     Data/Ant.h \
     Data/Node.h \
     Gui/MainWindow.h \
-    Gui/NodeGraphic.h
+    Gui/NodeGraphic.h \
+    Gui/MainWindowNew.h \
+    Gui/NodeWidget.h
 
 FORMS    +=
 

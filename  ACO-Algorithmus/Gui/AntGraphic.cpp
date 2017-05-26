@@ -66,6 +66,7 @@ static qreal normalizeAngle(qreal angle)
     while (angle > TwoPi)
         angle -= TwoPi;
     return angle;
+
 }
 
 //! [0]
@@ -92,7 +93,7 @@ QPainterPath AntGraphic::shape() const
 
 void AntGraphic::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    // Ameisenkörper
+    /* Ameisenkörper */
     painter->setBrush(Qt::black);
 
     //Kopf
