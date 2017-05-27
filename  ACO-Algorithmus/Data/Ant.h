@@ -1,7 +1,11 @@
 #ifndef ANT_H
 #define ANT_H
 
+#include <ctime>
+#include <cstdlib>
 #include <Gui/AntGraphic.h>
+#include <QDebug>
+#include <random>
 
 
 class Ant : public QObject
@@ -17,10 +21,21 @@ public:
 
     int getPathLength();
 
-    QList<QPoint *> getPath() const;
+    QList<QPoint *> getPath();
+
+    QPoint * getPosition();
+
+
     void setPath(const QList<QPoint *> &value);
 
     void sendSignal();
+
+    void step(float pheromones[8]);
+
+    void reset();
+
+    void resetToStart();
+
 
 private:
     int actualPathCount;

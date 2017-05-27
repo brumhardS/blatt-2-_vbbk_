@@ -6,7 +6,7 @@
 #include <Data/Ant.h>
 
 MainWindow::MainWindow(QList<Ant*> *allAnts, QPoint * berryPosition, QPoint * antColony, QPoint *raster) :
-    rectAngle(0,0,800,800),
+    rectAngle(0,0,720,720),
     view(&scene)
 {    
     scene.setSceneRect(rectAngle);
@@ -60,7 +60,7 @@ void MainWindow::setRectAngle(const QRectF &value)
 
 QPoint MainWindow::modelToWinCoordinates(int x, int y)
 {
-    return QPoint((800/20 * x),(800/20 * y));
+    return QPoint((720/20 * x),(720/20 * y));
 }
 
 

@@ -73,7 +73,9 @@ private:
     qreal angle;
     qreal speed;
     qreal antEyeDirection;
+    QPointF step;
     QWidget *parent;
+    QPoint modelToWinCoordinates(int x, int y);
 
 public slots:
     void goNext(QPoint *point);

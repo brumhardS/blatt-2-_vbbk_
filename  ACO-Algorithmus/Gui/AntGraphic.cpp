@@ -54,6 +54,7 @@
 #include <QPainter>
 #include <QStyleOption>
 #include <QDebug>
+#include <QTime>
 #include <qmath.h>
 #include <QtMath>
 
@@ -74,7 +75,8 @@ static qreal normalizeAngle(qreal angle)
 
 AntGraphic::AntGraphic()
     : angle(0), speed(0), antEyeDirection(0){
-    setRotation(qrand() % (360 * 16));
+    setRotation(0);
+    step = QPointF(0, 0);
 }
 
 
@@ -143,7 +145,7 @@ void AntGraphic::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWid
 }
 
 void AntGraphic::advance(int step)
-{
+{ /*
     if (!step)
         return;
     // Don't move too far away
@@ -205,17 +207,27 @@ void AntGraphic::advance(int step)
 
     setRotation(rotation() + dx);
     setPos(mapToParent(0, -(3 + sin(speed) * 3)));
+    */
+
+    //QPointF actualPosition = pos();
+    //qDebug() << "position: " << actualPosition;
+    //qDebug() << "actual + step: " << actualPosition + this->step;
+
+    //setPos(pos() + this->step);
+
 }
 
 void AntGraphic::goNext(QPoint *point)
 {
-    QPointF actualPosition = mapFromScene(0, 0);
-
-    qreal deltaX = point->rx() - actualPosition.rx();
-    qreal deltaY = point->ry() - actualPosition.ry();
-
-    qreal delta = qSqrt(deltaX);
+    QPointF destination = modelToWinCoordinates(point->rx(), point->ry());
+    step = (destination - pos())/64;
+    setPos(destination);
 
     // angle, speed und direction an hand von aktueller postition und ziel neu berechnen
     // advance() ameise in richtung angle und mit geschwindigkeit speed bewegen
+}
+
+QPoint AntGraphic::modelToWinCoordinates(int x, int y)
+{
+    return QPoint((720/20 * x),(720/20 * y));
 }

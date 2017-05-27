@@ -1,5 +1,6 @@
 //#include "MainWindow.h"
 
+#include <thread>
 #include <QApplication>
 #include <QDebug>
 #include <QtWidgets>
@@ -22,6 +23,9 @@ int main(int argc, char **argv)
                           new QPoint(ANT_COLONY_X, ANT_COLONY_Y),
                           new QPoint(RASTER_X, RASTER_Y));
    mainWindow->show();
+
+   std::thread algorithm (&MainApplication::run, mainapplication);
+
    return app.exec();
 }
 
