@@ -11,7 +11,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET =  ACOAlgorithmus
 TEMPLATE = app
 
-
 SOURCES += Main.cpp\
     Gui/AntGraphic.cpp \
     Gui/BerryGraphic.cpp \
@@ -35,3 +34,4 @@ FORMS    +=
 RESOURCES += \
     externpicutures.qrc
 
+STATECHARTS +=
