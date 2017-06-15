@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     ACO_Algorithmus \
-    Test
+    Test \
+    UnitTests
