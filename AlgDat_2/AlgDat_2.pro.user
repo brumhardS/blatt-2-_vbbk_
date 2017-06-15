@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.3.0, 2017-06-15T15:20:11. -->
+<!-- Written by QtCreator 4.3.0, 2017-06-15T15:23:51. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -285,8 +285,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">ACO_Algorithmus</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/vasij/Documents/AlgDat_2/ACO_Algorithmus/ACO_Algorithmus.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">ACO_Algorithmus2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/vasij/Desktop/Studium/8. Semester/Algorithmen und Datenstrukturen 2/Projekt/blatt-2-_vbbk_/AlgDat_2/ACO_Algorithmus/ACO_Algorithmus.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">ACO_Algorithmus/ACO_Algorithmus.pro</value>
