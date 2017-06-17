@@ -1,2 +1,7 @@
-language: C++
-script: make
+# Enable C++ support
+language: cpp
+
+# Build steps
+script:
+  - cd blatt-2-_vbbk
+  - mkdir build
