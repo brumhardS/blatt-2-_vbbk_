@@ -10,6 +10,17 @@
 #include <Logic/MainApplication.h>
 #include "Gui/AntGraphic.h"
 
+void initializeAndStartAlgorithmThread(MainApplication * mainapplication)
+{
+    QThread* thread = new QThread;
+    mainapplication->moveToThread(thread);
+    QObject::connect(thread, SIGNAL(started()), mainapplication, SLOT(run()));
+    QObject::connect(mainapplication, SIGNAL(finished()), thread, SLOT(quit()));
+    QObject::connect(mainapplication, SIGNAL(finished()), mainapplication, SLOT(deleteLater()));
+    QObject::connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
+    thread->start();
+}
+
 int main(int argc, char **argv)
 {
    QApplication app(argc, argv);
@@ -24,7 +35,7 @@ int main(int argc, char **argv)
                           new QPoint(RASTER_X, RASTER_Y));
    mainWindow->show();
 
-   std::thread algorithm (&MainApplication::run, mainapplication);
+   initializeAndStartAlgorithmThread(mainapplication);
 
    return app.exec();
 }

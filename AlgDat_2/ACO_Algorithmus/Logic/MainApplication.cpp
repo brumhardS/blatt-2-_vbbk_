@@ -2,53 +2,14 @@
 
 MainApplication::MainApplication()
 {
-    list = new QList<Ant*>;
-
-    for(int i= 0; i < RASTER_X; i++)
-    {
-        for(int j = 0; j < RASTER_Y; j++)
-        {
-            raster[i][j] = 1;
-
-            for(int k = 0; k < 8; k++) {
-
-                pheromone[i][j][k] = 1;
-            }
-        }
-    }
-
-    raster[ANT_COLONY_X][ANT_COLONY_Y] = ANTCOLONY;
-    raster[BERRY_POSITION_X][BERRY_POSITION_Y] = BERRY;
-
-    for(int i = 0; i < RASTER_X; i++)
-    {
-        pheromone[i][0][0] = 0;
-        pheromone[i][0][1] = 0;
-        pheromone[i][0][7] = 0;
-        pheromone[i][RASTER_Y - 1][3] = 0;
-        pheromone[i][RASTER_Y - 1][4] = 0;
-        pheromone[i][RASTER_Y - 1][5] = 0;
-    }
-
-    for(int i = 0; i < RASTER_Y; i++)
-    {
-        pheromone[0][i][5] = 0;
-        pheromone[0][i][6] = 0;
-        pheromone[0][i][7] = 0;
-        pheromone[RASTER_X - 1][i][1] = 0;
-        pheromone[RASTER_X - 1][i][2] = 0;
-        pheromone[RASTER_X - 1][i][3] = 0;
-    }
-
+    initializeRaster();
+    initializePheromone();
 
     list = new QList<Ant*>();
     for(int i= 0; i < ANT_COUNT; i++)
     {
         list->append(new Ant(new QPoint(ANT_COLONY_X, ANT_COLONY_Y)));
     }
-
-
-
 }
 
 MainApplication::~MainApplication()
@@ -66,7 +27,7 @@ void MainApplication::setList(QList<Ant*> *value)
     list = value;
 }
 
-float* MainApplication::pheromonesFor(Ant * ant){
+float *MainApplication::pheromonesFor(Ant * ant){
     int x = ant->getPosition()->rx();
     int y = ant->getPosition()->ry();
     return pheromone[x][y];
@@ -89,8 +50,6 @@ void MainApplication::updatePheromones(Ant *ant)
     if(path.size() > shortestPath) return;
 
     shortestPath = path.size();
-
-    qDebug() << "updating Pheromones";
 
     for(int i = 0; i < RASTER_X; i++)
     {
@@ -136,7 +95,12 @@ void MainApplication::run(){
     std::chrono::system_clock::time_point next = std::chrono::system_clock::now();
     next += std::chrono::milliseconds(STEP_CLOCK);
 
-    while(true){
+    // Vielleicht brauchen wir das Später!
+    // QTimer *timeTillEnd = new QTimer();
+    // timeTillEnd->setInterval(RUNTIME);
+    // timeTillEnd->start();
+
+    while(true/*timeTillEnd->isActive()*/){
         for (int i = 0; i < list->size(); i++) {
             Ant * currentAnt = list->at(i);
 
@@ -159,11 +123,12 @@ void MainApplication::run(){
             {
                 if(currentAnt->getIsSearchFeed())
                 {
-                    qDebug() << "SUCCESS!" << " path length: " << currentAnt->getPath().size();
+                    //qDebug() << "SUCCESS!" << " path length: " << currentAnt->getPath().size();
                     updatePheromones(currentAnt);
                     currentAnt->resetToStart();
 
-                } else
+                }
+                else
                 {
                    // currentAnt->reset();
                 }
@@ -193,6 +158,49 @@ void MainApplication::run(){
         // todo calculate new podsitions
         // check if ant reached destination or origin
         // update all ants
+    }
+    emit finished();
+}
+
+void MainApplication::initializeRaster()
+{
+    for(int i= 0; i < RASTER_X; i++)
+    {
+        for(int j = 0; j < RASTER_Y; j++)
+        {
+            raster[i][j] = 1;
+
+            for(int k = 0; k < 8; k++) {
+
+                pheromone[i][j][k] = 1;
+            }
+        }
+    }
+
+    raster[ANT_COLONY_X][ANT_COLONY_Y] = ANTCOLONY;
+    raster[BERRY_POSITION_X][BERRY_POSITION_Y] = BERRY;
+}
+
+void MainApplication::initializePheromone()
+{
+    for(int i = 0; i < RASTER_X; i++)
+    {
+        pheromone[i][0][0] = 0;
+        pheromone[i][0][1] = 0;
+        pheromone[i][0][7] = 0;
+        pheromone[i][RASTER_Y - 1][3] = 0;
+        pheromone[i][RASTER_Y - 1][4] = 0;
+        pheromone[i][RASTER_Y - 1][5] = 0;
+    }
+
+    for(int i = 0; i < RASTER_Y; i++)
+    {
+        pheromone[0][i][5] = 0;
+        pheromone[0][i][6] = 0;
+        pheromone[0][i][7] = 0;
+        pheromone[RASTER_X - 1][i][1] = 0;
+        pheromone[RASTER_X - 1][i][2] = 0;
+        pheromone[RASTER_X - 1][i][3] = 0;
     }
 }
 

@@ -49,22 +49,23 @@
 ****************************************************************************/
 
 #ifndef MOUSE_H
-#define MOUSE_H ///////
-////////
+#define MOUSE_H
+#include "BasicGraphicItem.h"
+
 #include <QGraphicsItem>
 #include <QObject>
 
 
-class AntGraphic : public QGraphicsObject
+class AntGraphic : public BasicGraphicItem
 {
     Q_OBJECT
 public:
     AntGraphic();
 
-    QRectF boundingRect() const override;
-    QPainterPath shape() const override;
+    QRectF boundingRect() const;
+    QPainterPath shape()const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-               QWidget *widget) override;
+               QWidget *widget);
 
 protected:
     void advance(int step) override;

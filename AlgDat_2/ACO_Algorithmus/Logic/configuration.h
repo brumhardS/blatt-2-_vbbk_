@@ -1,0 +1,27 @@
+#ifndef CONFIGURATION_H
+#define CONFIGURATION_H
+
+#define RUNTIME 20
+
+#define PHEROMONE_INCREASE 10.0
+#define PHEROMONE_DECREASE 0.9
+
+#define ANT_COUNT 200
+#define BERRY_COUNT 1
+
+#define STEP_CLOCK 100
+
+#define RASTER_X 20
+#define RASTER_Y 20
+
+#define PATH 1
+#define BERRY 2
+#define ANTCOLONY 3
+
+#define BERRY_POSITION_X 15
+#define BERRY_POSITION_Y 15
+
+#define ANT_COLONY_X 5
+#define ANT_COLONY_Y 5
+
+#endif // CONFIGURATION_H

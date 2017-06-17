@@ -146,7 +146,8 @@ void AntGraphic::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWid
 
 void AntGraphic::advance(int step)
 {
-            /*
+    Q_UNUSED(step);
+    /*
     if (!step)
         return;
     // Don't move too far away

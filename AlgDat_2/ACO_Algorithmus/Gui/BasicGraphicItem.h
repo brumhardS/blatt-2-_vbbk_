@@ -1,16 +1,15 @@
-#ifndef STICK_H
-#define STICK_H
-
-#include "BasicGraphicItem.h"
+#ifndef BASICGRAPHICITEM_H
+#define BASICGRAPHICITEM_H
 
 #include <QGraphicsItem>
 
 
-
-class StickGrafic : public BasicGraphicItem
+class BasicGraphicItem : public QGraphicsObject
 {
 public:
-    StickGrafic();
+    BasicGraphicItem();
+
+
 
     // QGraphicsItem interface
 public:
@@ -19,4 +18,4 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
 
-#endif // STICK_H
+#endif // BASICGRAPHICITEM_H

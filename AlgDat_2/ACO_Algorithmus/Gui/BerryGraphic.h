@@ -1,18 +1,20 @@
 #ifndef BERRY_H
 #define BERRY_H
 
+#include "BasicGraphicItem.h"
+
 #include <QGraphicsItem>
 
 
 
 
-class BerryGraphic : public QGraphicsItem
+class BerryGraphic : public BasicGraphicItem
 {
 public:
     BerryGraphic();
-    QRectF boundingRect() const override;
-    QPainterPath shape() const override;
+    QRectF boundingRect() const;
+    QPainterPath shape() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-               QWidget *widget) override;
+               QWidget *widget);
 };
 #endif // BERRY_H

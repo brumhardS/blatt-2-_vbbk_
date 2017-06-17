@@ -8,6 +8,7 @@
 MainWindow::MainWindow(QList<Ant*> *allAnts, QPoint * berryPosition, QPoint * antColony, QPoint *raster) :
     rectAngle(0,0,720,720)
 {    
+    Q_UNUSED(raster);
     scene = new QGraphicsScene;
     view = new QGraphicsView(scene);
     scene->setSceneRect(rectAngle);
@@ -16,16 +17,15 @@ MainWindow::MainWindow(QList<Ant*> *allAnts, QPoint * berryPosition, QPoint * an
 
     for (int i = 0; i < allAnts->size(); ++i)
     {
-        AntGraphic *ant = new AntGraphic();
+        BasicGraphicItem *ant = new AntGraphic();
 
-        ///!! Connections!!
-        QObject::connect(allAnts->at(i), &Ant::move, ant, &AntGraphic::goNext);
+        QObject::connect(allAnts->at(i), &Ant::move, (AntGraphic*) ant, &AntGraphic::goNext);
         ant->setPos(modelToWinCoordinates(antColony->rx(), antColony->ry()));
 
         scene->addItem(ant);
     }
 
-    BerryGraphic *berryThree = new BerryGraphic;
+    BasicGraphicItem *berryThree = new BerryGraphic;
     berryThree->setPos(modelToWinCoordinates(berryPosition->rx(), berryPosition->ry()));
     scene->addItem(berryThree);
 

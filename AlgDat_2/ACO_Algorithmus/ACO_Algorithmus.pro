@@ -19,7 +19,8 @@ SOURCES += Main.cpp\
     Gui/TreeGraphic.cpp \
     Data/Ant.cpp \
     Gui/MainWindow.cpp \
-    Logic/MainApplication.cpp
+    Logic/MainApplication.cpp \
+    Gui/BasicGraphicItem.cpp
 
 HEADERS  += \
     Gui/AntGraphic.h \
@@ -28,7 +29,9 @@ HEADERS  += \
     Gui/TreeGraphic.h \
     Data/Ant.h \
     Gui/MainWindow.h \
-    Logic/MainApplication.h
+    Logic/MainApplication.h \
+    Logic/Configuration.h \
+    Gui/BasicGraphicItem.h
 
 FORMS    +=
 
