@@ -3,5 +3,5 @@ language: cpp
 
 # Build steps
 script:
-  - cd blatt-2-_vbbk
+  - cd AlgDat_2
   - mkdir build
