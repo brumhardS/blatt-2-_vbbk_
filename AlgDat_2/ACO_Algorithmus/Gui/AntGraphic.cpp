@@ -79,6 +79,10 @@ AntGraphic::AntGraphic()
     step = QPointF(0, 0);
 }
 
+AntGraphic::~AntGraphic()
+{
+}
+
 
 QRectF AntGraphic::boundingRect() const
 {

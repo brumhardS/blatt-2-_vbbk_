@@ -39,6 +39,7 @@ class MainApplication : public QObject
 public:
 
     MainApplication();
+    ~MainApplication();
     QList<Ant*> *list;
 
     int raster[RASTER_X][RASTER_Y];

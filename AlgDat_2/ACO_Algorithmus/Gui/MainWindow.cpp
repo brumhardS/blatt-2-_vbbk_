@@ -43,6 +43,14 @@ MainWindow::MainWindow(QList<Ant*> *allAnts, QPoint * berryPosition, QPoint * an
     timer.start(1000 / 33);
 }
 
+MainWindow::~MainWindow()
+{
+     delete scene;
+     delete rectAngle;
+     delete view;
+     delete timer;
+}
+
 void MainWindow::show()
 {
     view.show();

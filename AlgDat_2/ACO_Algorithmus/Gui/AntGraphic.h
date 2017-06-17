@@ -60,7 +60,7 @@ class AntGraphic : public QGraphicsObject
     Q_OBJECT
 public:
     AntGraphic();
-
+    ~AntGraphic();
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -74,7 +74,6 @@ private:
     qreal speed;
     qreal antEyeDirection;
     QPointF step;
-    QWidget *parent;
     QPoint modelToWinCoordinates(int x, int y);
 
 public slots:

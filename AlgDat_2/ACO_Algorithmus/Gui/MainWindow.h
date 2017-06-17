@@ -16,6 +16,7 @@ class MainWindow : public QObject
 
 public:
      MainWindow(QList<Ant*> *allAnts, QPoint * berryPosition, QPoint * antColony, QPoint *raster);
+     ~MainWindow();
      void show();
 
      QRectF getRectAngle() const;
