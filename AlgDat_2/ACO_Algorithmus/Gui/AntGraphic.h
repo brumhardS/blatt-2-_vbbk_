@@ -60,17 +60,22 @@ class AntGraphic : public BasicGraphicItem
 {
     Q_OBJECT
 public:
-    AntGraphic();
+    AntGraphic(int antID);
 
     QRectF boundingRect() const;
     QPainterPath shape()const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget);
 
+    qreal getAngle() const;
+    void setAngle(const qreal &value);
+
 protected:
     void advance(int step) override;
 
 private:
+    void advance(int step, QPointF destination);
+    int antID;
     qreal angle;
     qreal speed;
     qreal antEyeDirection;
@@ -79,6 +84,8 @@ private:
 
 public slots:
     void goNext(QPoint *point);
+signals:
+    void setID(int id);
 };
 //! [0]
 

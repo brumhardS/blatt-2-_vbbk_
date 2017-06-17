@@ -1,4 +1,5 @@
 #include "Ant.h"
+#include "configuration.h"
 
 //
 Ant::Ant(QPoint *actualPos) :
@@ -55,8 +56,14 @@ void Ant::resetToStart()
 
 }
 
+void Ant::setID(int id)
+{
+    Logging::logStatus(QString("SET-ID: %1").arg(id));
+    antID = id;
+}
 
-void Ant::step(float pheromones[8]){
+
+void Ant::step(float pheromones[8]){ // 8 -> Nachbarn
 
     float sumP = 0;
 
@@ -106,8 +113,23 @@ void Ant::step(float pheromones[8]){
         case 7: newPosition = new QPoint(x - 1, y - 1);
 
     }
-    path.append(newPosition);
-
+    if((newPosition->rx() <= RASTER_X && newPosition->rx()>= 0) &&
+            (newPosition->ry() <= RASTER_Y && newPosition->ry() >=0))
+    {
+        path.append(newPosition);
+    }
+    else
+    {
+        Logging::logWarning(QString("ANT-NR: %5: Set old Position, because the next Position is INVALID!!!!! "
+                                    "--> old Positioni: x = %1, y= %2 --> "
+                                    "new Position: x = %3, y= %4 ")
+                            .arg(newPosition->rx())
+                            .arg(newPosition->ry())
+                            .arg(x)
+                            .arg(y)
+                            .arg(antID));
+        path.append(new QPoint(ANT_COLONY_X,ANT_COLONY_Y));
+    }
 }
 
 void Ant::sendSignal()

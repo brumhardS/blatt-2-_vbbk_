@@ -103,9 +103,9 @@ void MainApplication::run(){
     while(true/*timeTillEnd->isActive()*/){
         for (int i = 0; i < list->size(); i++) {
             Ant * currentAnt = list->at(i);
-
             if(isAtHome(currentAnt))
             {
+                Logging::logStatus("Ant is at home!");
                 if(currentAnt->getIsSearchFeed())
                 {
                     currentAnt->reset();
@@ -121,9 +121,9 @@ void MainApplication::run(){
 
             if(isAtFood(currentAnt))
             {
+                Logging::logStatus("Ant has found feed!");
                 if(currentAnt->getIsSearchFeed())
                 {
-                    //qDebug() << "SUCCESS!" << " path length: " << currentAnt->getPath().size();
                     updatePheromones(currentAnt);
                     currentAnt->resetToStart();
 
@@ -133,12 +133,7 @@ void MainApplication::run(){
                    // currentAnt->reset();
                 }
             }
-
-
-
             currentAnt->step(pheromonesFor(currentAnt));
-
-
 
         }
 

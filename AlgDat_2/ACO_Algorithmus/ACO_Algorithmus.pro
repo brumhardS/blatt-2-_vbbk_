@@ -20,7 +20,8 @@ SOURCES += Main.cpp\
     Data/Ant.cpp \
     Gui/MainWindow.cpp \
     Logic/MainApplication.cpp \
-    Gui/BasicGraphicItem.cpp
+    Gui/BasicGraphicItem.cpp \
+    Logging/Logging.cpp
 
 HEADERS  += \
     Gui/AntGraphic.h \
@@ -30,8 +31,9 @@ HEADERS  += \
     Data/Ant.h \
     Gui/MainWindow.h \
     Logic/MainApplication.h \
-    Logic/Configuration.h \
-    Gui/BasicGraphicItem.h
+    Configuration.h \
+    Gui/BasicGraphicItem.h \
+    Logging/Logging.h
 
 FORMS    +=
 

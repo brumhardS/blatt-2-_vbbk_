@@ -17,9 +17,10 @@ MainWindow::MainWindow(QList<Ant*> *allAnts, QPoint * berryPosition, QPoint * an
 
     for (int i = 0; i < allAnts->size(); ++i)
     {
-        BasicGraphicItem *ant = new AntGraphic();
+        BasicGraphicItem *ant = new AntGraphic(i);
 
         QObject::connect(allAnts->at(i), &Ant::move, (AntGraphic*) ant, &AntGraphic::goNext);
+        QObject::connect((AntGraphic*) ant, SIGNAL(setID(int)), allAnts->at(i), SLOT(setID(int)));
         ant->setPos(modelToWinCoordinates(antColony->rx(), antColony->ry()));
 
         scene->addItem(ant);

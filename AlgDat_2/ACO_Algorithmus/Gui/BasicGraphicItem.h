@@ -2,6 +2,7 @@
 #define BASICGRAPHICITEM_H
 
 #include <QGraphicsItem>
+#include <Logging/Logging.h>
 
 
 class BasicGraphicItem : public QGraphicsObject

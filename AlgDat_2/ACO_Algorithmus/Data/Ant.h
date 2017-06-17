@@ -15,6 +15,7 @@ class Ant : public QObject
 public:
 
     Ant(QPoint *actualPos);
+    int antID;
 
     bool getIsSearchFeed();
     void setIsSearchFeed(bool value);
@@ -49,6 +50,8 @@ private:
 
 signals:
     void move(QPoint *point);
+public slots:
+    void setID(int id);
 };
 
 #endif // ANT_H
