@@ -16,7 +16,6 @@ class MainWindow : public QObject
 
 public:
      MainWindow(QList<Ant*> *allAnts, QPoint * berryPosition, QPoint * antColony, QPoint *raster);
-     ~MainWindow();
      void show();
 
      QRectF getRectAngle() const;
@@ -26,9 +25,9 @@ private:
 
      QPoint modelToWinCoordinates(int x, int y);
 
-     QGraphicsScene scene;
+     QGraphicsScene * scene;
      QRectF rectAngle;
-     QGraphicsView view;
+     QGraphicsView * view;
      QTimer timer;
 };
 

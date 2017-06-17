@@ -79,10 +79,6 @@ AntGraphic::AntGraphic()
     step = QPointF(0, 0);
 }
 
-AntGraphic::~AntGraphic()
-{
-}
-
 
 QRectF AntGraphic::boundingRect() const
 {
@@ -149,7 +145,8 @@ void AntGraphic::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWid
 }
 
 void AntGraphic::advance(int step)
-{ /*
+{
+            /*
     if (!step)
         return;
     // Don't move too far away

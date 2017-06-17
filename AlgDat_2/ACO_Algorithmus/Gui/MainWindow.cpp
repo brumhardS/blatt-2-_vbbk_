@@ -6,12 +6,13 @@
 #include <Data/Ant.h>
 
 MainWindow::MainWindow(QList<Ant*> *allAnts, QPoint * berryPosition, QPoint * antColony, QPoint *raster) :
-    rectAngle(0,0,720,720),
-    view(&scene)
+    rectAngle(0,0,720,720)
 {    
-    scene.setSceneRect(rectAngle);
+    scene = new QGraphicsScene;
+    view = new QGraphicsView(scene);
+    scene->setSceneRect(rectAngle);
 
-    scene.setItemIndexMethod(QGraphicsScene::NoIndex);
+    scene->setItemIndexMethod(QGraphicsScene::NoIndex);
 
     for (int i = 0; i < allAnts->size(); ++i)
     {
@@ -21,39 +22,31 @@ MainWindow::MainWindow(QList<Ant*> *allAnts, QPoint * berryPosition, QPoint * an
         QObject::connect(allAnts->at(i), &Ant::move, ant, &AntGraphic::goNext);
         ant->setPos(modelToWinCoordinates(antColony->rx(), antColony->ry()));
 
-        scene.addItem(ant);
+        scene->addItem(ant);
     }
 
     BerryGraphic *berryThree = new BerryGraphic;
     berryThree->setPos(modelToWinCoordinates(berryPosition->rx(), berryPosition->ry()));
-    scene.addItem(berryThree);
+    scene->addItem(berryThree);
 
-    view.setRenderHint(QPainter::Antialiasing);
-    view.setBackgroundBrush(QPixmap(":/Images/gras.jpg"));
+    view->setRenderHint(QPainter::Antialiasing);
+    view->setBackgroundBrush(QPixmap(":/Images/gras.jpg"));
 
-    view.setCacheMode(QGraphicsView::CacheBackground);
-    view.setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-    view.setDragMode(QGraphicsView::ScrollHandDrag);
+    view->setCacheMode(QGraphicsView::CacheBackground);
+    view->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    view->setDragMode(QGraphicsView::ScrollHandDrag);
 
-    view.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "ACO-Algorithmus"));
-    view.resize(700, 700);
-    view.show();
+    view->setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "ACO-Algorithmus"));
+    view->resize(700, 700);
+    view->show();
 
-    QObject::connect(&timer, SIGNAL(timeout()), &scene, SLOT(advance()));
+    QObject::connect(&timer, SIGNAL(timeout()), scene, SLOT(advance()));
     timer.start(1000 / 33);
-}
-
-MainWindow::~MainWindow()
-{
-     delete scene;
-     delete rectAngle;
-     delete view;
-     delete timer;
 }
 
 void MainWindow::show()
 {
-    view.show();
+    view->show();
 }
 
 QRectF MainWindow::getRectAngle() const

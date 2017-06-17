@@ -2,6 +2,7 @@
 
 MainApplication::MainApplication()
 {
+    list = new QList<Ant*>;
 
     for(int i= 0; i < RASTER_X; i++)
     {
@@ -89,7 +90,7 @@ void MainApplication::updatePheromones(Ant *ant)
 
     shortestPath = path.size();
 
-    //qDebug() << "updating Pheromones";
+    qDebug() << "updating Pheromones";
 
     for(int i = 0; i < RASTER_X; i++)
     {
@@ -102,7 +103,7 @@ void MainApplication::updatePheromones(Ant *ant)
         }
     }
 
-    for(int i; i < path.size() - 2; i++)
+    for(int i = 0; i < path.size() - 2; i++)
     {
         QPoint * p1 = path.at(i);
         QPoint * p2 = path.at(i+1);
@@ -158,7 +159,7 @@ void MainApplication::run(){
             {
                 if(currentAnt->getIsSearchFeed())
                 {
-                    //qDebug() << "SUCCESS!" << " path length: " << currentAnt->getPath().size();
+                    qDebug() << "SUCCESS!" << " path length: " << currentAnt->getPath().size();
                     updatePheromones(currentAnt);
                     currentAnt->resetToStart();
 

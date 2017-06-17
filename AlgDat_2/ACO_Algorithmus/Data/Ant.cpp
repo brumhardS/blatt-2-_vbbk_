@@ -4,6 +4,7 @@
 Ant::Ant(QPoint *actualPos) :
    isSearchFeed(true)
 {    
+    path = QList<QPoint*>();
     path.append(actualPos);
 }
 
