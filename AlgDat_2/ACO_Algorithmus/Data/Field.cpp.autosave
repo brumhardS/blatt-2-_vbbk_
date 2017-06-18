@@ -1,0 +1,21 @@
+#include "Field.h"
+
+Field::Field()
+{
+    
+}
+
+Node *Field::getNode(int x, int y)
+{
+    
+}
+
+float *Field::getNeighboursPheromone(int x, int y)
+{
+    
+}
+
+void Field::init()
+{
+    
+}

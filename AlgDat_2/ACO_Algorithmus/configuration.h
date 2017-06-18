@@ -6,13 +6,13 @@
 #define PHEROMONE_INCREASE 10.0
 #define PHEROMONE_DECREASE 0.9
 
-#define ANT_COUNT 200
+#define ANT_COUNT 100
 #define BERRY_COUNT 1
 
 #define STEP_CLOCK 100
 
-#define RASTER_X 20
-#define RASTER_Y 20
+#define RASTER_X 60
+#define RASTER_Y 30
 
 #define PATH 1
 #define BERRY 2
