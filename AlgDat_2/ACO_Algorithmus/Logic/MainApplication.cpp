@@ -1,5 +1,6 @@
 #include "MainApplication.h"
 
+//This is the main 
 MainApplication::MainApplication()
 {
     initializeRaster();
